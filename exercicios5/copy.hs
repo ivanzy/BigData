@@ -27,7 +27,7 @@ data Pet = Dog | Bird | Cat | Horse | Fish
 
 main :: IO ()
 main = do
-          let sol = head solutions
+          let sol = head solution
           mapM_ (\(i,h) -> putStrLn $ (show i) ++ " " ++ pprint2 h) (zip [1..5] sol)
           putStrLn ""
 
@@ -95,8 +95,8 @@ r14 h = color h == Blue
 houses' :: [House]
 houses' = filter (compRules rules) houses
 
-solutions :: [[House]]
-solutions = [ [h1, h2, h3, h4, h5] | h1 <- filter (compRules [(not . r8),        r9 , (not . r14)]) houses',
+solution :: [[House]]
+solution = [ [h1, h2, h3, h4, h5] | h1 <- filter (compRules [(not . r8),        r9 , (not . r14)]) houses',
                                      h2 <- filter (compRules [(not . r8), (not . r9),        r14 ]) houses',
                                      h3 <- filter (compRules [       r8 , (not . r9), (not . r14)]) houses',
                                      h4 <- filter (compRules [(not . r8), (not . r9), (not . r14)]) houses',
