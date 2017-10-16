@@ -1,17 +1,14 @@
 module Main where
 import System.IO
-import Control.Monad.Random
+
 
 data Color = Yellow | Red | Blue | Ivory | Green deriving (Show,  Eq, Enum)
 data Drink = Tea | Milk | Coffee | Water | Orange deriving (Show,  Eq, Enum)
 data Pet = Zebra | Dog | Snails | Fox | Horse deriving (Show,  Eq, Enum)
 data Nationality = Norwegian | Japanese | Ukrainian | Spaniard | Englishman deriving (Show,  Eq, Enum)
 data Smoke = LuckyStrike | OldGold | Parliament | Kools | Chesterfield deriving (Show,  Eq, Enum)
-data House = House Color Nationality Pet Drink Smoke deriving (Show,  Eq, Enum)
+data House = House Color Nationality Pet Drink Smoke deriving (Show,  Eq)
 
-geraTestes :: [Color] -> [Nationality] -> [Pet] -> [Drink] -> [Smoke] -> [House]
-	geraTestes c n p d s 
-		| testChallenge House
 
 test3 n p  --The Spaniard owns the dog.
 	| (n /= Spaniard) && (p/= Dog) = True
@@ -85,14 +82,13 @@ testChallenge [(House c1 n1 p1 d1 s1),(House c2 n2 p2 d2 s2),(House c3 n3 p3 d3 
 
 main :: IO ()
 main = do
-	
+	let h1 = House Yellow	Norwegian	Fox		Water	Kools
+	let h2 = House Blue		Ukrainian	Horse	Tea 	Chesterfield 
+	let h3 = House Red		Englishman 	Snails	Milk	OldGold
+	let h4 = House Ivory 	Spaniard 	Dog		Orange	LuckyStrike
+	let h5 = House Green 	Japanese 	Zebra	Coffee	Parliament
+	print $ testChallenge [h1,h2,h3,h4,h5]
 
-	--print $ testChallenge [h1,h2,h3,h4,h5]
-	--let h1 = House Yellow	Norwegian	Fox		Water	Kools
-	--let h2 = House Blue		Ukrainian	Horse	Tea 	Chesterfield 
---	let h3 = House Red		Englishman 	Snails	Milk	OldGold
-	--let h4 = House Ivory 	Spaniard 	Dog		Orange	LuckyStrike
---	let h5 = House Green 	Japanese 	Zebra	Coffee	Parliament
 
 
 	
