@@ -9,11 +9,7 @@ data Nationality = Norwegian | Japanese | Ukrainian | Spaniard | Englishman deri
 data Smoke = LuckyStrike | OldGold | Parliament | Kools | Chesterfield deriving (Show,  Eq, Enum, Ord)
 data House = House Color Nationality Pet Drink Smoke deriving (Show,  Eq, Ord)
 
-
 cartProd cs ns ps ds ss = [House c n p d s | c <- cs, n <- ns, p <- ps, d <- ds, s <-ss]
-
-getAllPermutations :: Ord a => [a] -> [[a]]
-getAllPermutations x = nub $ map sort $ map (take 5) (permutations x)
 
 test3 n p  --The Spaniard owns the dog.
 	| (n /= Spaniard) && (p/= Dog) = True
@@ -96,6 +92,12 @@ resolveChallenge houses = resolveChallenge' houses 0
 			| (checkValid (houses !! n) == True) = (houses !! n)
 			| otherwise = resolveChallenge (tail houses) 
 
+-- Using list comprehensions
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _  = [ [] ]
+combinations n xs = [ y:ys | y:xs' <- tails xs
+                           , ys <- combinations (n-1) xs']
+
 main :: IO ()
 main = do
 	let h1 = House Yellow	Norwegian	Fox		Water	Kools
@@ -104,7 +106,7 @@ main = do
 	let h4 = House Ivory 	Spaniard 	Dog		Orange	LuckyStrike
 	let h5 = House Green 	Japanese 	Zebra	Coffee	Parliament
 	let allCombinations = cartProd [Yellow .. Green] [Norwegian .. Englishman] [Zebra .. Horse] [Tea .. Orange] [LuckyStrike .. Chesterfield]
-	print $ resolveChallenge (getAllPermutations allCombinations)
+	print $ resolveChallenge (combinations allCombinations)
 	print $ testChallenge [h1,h2,h3,h4,h5]
 	print $ testChallenge [h1,h2,h3,h5,h4]
 
